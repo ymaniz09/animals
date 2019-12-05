@@ -1,0 +1,15 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: msfjarvis/setup-android@0.2
+    - name: setup-android
+      with:
+        # Gradle tasks to run - If you want to run ./gradlew assemble, specify assemble here. 
+        gradleTasks: assembleDebug
