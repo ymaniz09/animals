@@ -11,7 +11,7 @@
         android:label="fragment_list_animals"
         tools:layout="@layout/fragment_list_animals" >
         <action
-            android:id="@+id/actionGoTodetails"
+            android:id="@+id/actionGoToDetails"
             app:destination="@id/detailsAnimalFragment" />
     </fragment>
     <fragment

@@ -29,12 +29,10 @@ android {
     dataBinding.enabled = true
 }
 
-def lifeCycleExtensionVersion = '1.1.1'
-def supportVersion = '28.0.0'
 def retrofitVersion = '2.3.0'
 def glideVersion = '4.10.0'
 def rxJavaVersion = '2.1.1'
-def navVersion = '2.1.0-alpha05'
+def navVersion = '2.2.0-rc03'
 def daggerVersion = '2.25.2'
 def mockitoVersion = '2.11.0'
 
@@ -45,9 +43,9 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
-    implementation "com.android.support:design:$supportVersion"
+    implementation 'com.google.android.material:material:1.0.0'
 
-    implementation "android.arch.lifecycle:extensions:$lifeCycleExtensionVersion"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 
     implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
@@ -61,7 +59,7 @@ dependencies {
 
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 
-    implementation "com.android.support:palette-v7:$supportVersion"
+    implementation 'androidx.palette:palette:1.0.0'
 
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
@@ -70,7 +68,7 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
-    testImplementation "android.arch.core:core-testing:1.1.1"
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
     kaptTest "com.google.dagger:dagger-compiler:$daggerVersion"
 
     testImplementation 'junit:junit:4.12'
