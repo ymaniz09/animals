@@ -1,6 +1,5 @@
 package com.github.ymaniz09.animals.view
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
