@@ -1,7 +1,10 @@
 package com.github.ymaniz09.animals.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Animal(
     val name: String?,
     val taxonomy: Taxonomy?,
@@ -12,4 +15,4 @@ data class Animal(
     val lifeSpan: String?,
     @SerializedName("image")
     val imageUrl: String?
-)
+) : Parcelable

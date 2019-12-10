@@ -2,6 +2,7 @@ package com.github.ymaniz09.animals.view
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ymaniz09.animals.R
 import com.github.ymaniz09.animals.util.inflate
@@ -24,6 +25,10 @@ class AnimalListAdapter(private val animalList: ArrayList<Animal>) :
         holder.view.animalName.text = animalList[position].name
         holder.view.animalImage.loadImage(animalList[position].imageUrl,
             getProgressDrawable(holder.view.context))
+        holder.view.animalLayout.setOnClickListener {
+            val action = ListAnimalsFragmentDirections.actionGoToDetails(animalList[position])
+            Navigation.findNavController(holder.view).navigate(action)
+        }
     }
 
     fun updateAnimalList(newAnimalList: List<Animal>) {
