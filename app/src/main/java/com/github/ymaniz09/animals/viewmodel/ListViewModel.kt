@@ -4,7 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.github.ymaniz09.animals.TAG
+import com.github.ymaniz09.animals.util.TAG
 import com.github.ymaniz09.animals.model.Animal
 import com.github.ymaniz09.animals.model.AnimalApiService
 import com.github.ymaniz09.animals.model.ApiKey
