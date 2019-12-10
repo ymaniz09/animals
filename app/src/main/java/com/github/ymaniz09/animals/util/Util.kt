@@ -10,6 +10,8 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.palette.graphics.Palette
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
@@ -37,9 +39,32 @@ fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable
         .into(this)
 }
 
-fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
-    return LayoutInflater.from(context)
-        .inflate(layoutRes, this, attachToRoot)
+/**
+ * Extension method to provide quicker access to the [LayoutInflater] from [Context].
+ */
+fun Context.getLayoutInflater() = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+/**
+ * Extension method to provide quicker access to the [LayoutInflater] from a [View].
+ */
+fun View.getLayoutInflater() = context.getLayoutInflater()
+
+/**
+ * Extension method to simplify view inflating and binding inside a [ViewGroup].
+ *
+ * e.g.
+ * This:
+ *<code>
+ *     binding = bind(R.layout.widget_card, false)
+ *</code>
+ *
+ * Will replace this:
+ *<code>
+ *     binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.widget_card, this, false)
+ *</code>
+ */
+fun <T : ViewDataBinding> ViewGroup.bind(layoutId: Int, attachToParent: Boolean): T {
+    return DataBindingUtil.inflate(getLayoutInflater(), layoutId, this, attachToParent)
 }
 
 val Any.TAG: String
