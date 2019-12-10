@@ -27,12 +27,14 @@ android {
     }
 
     dataBinding.enabled = true
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
-def retrofitVersion = '2.3.0'
-def glideVersion = '4.10.0'
+
 def rxJavaVersion = '2.1.1'
-def navVersion = '2.2.0-rc03'
 def daggerVersion = '2.25.2'
 def mockitoVersion = '2.11.0'
 
@@ -47,17 +49,17 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 
-    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.2.0-rc03"
+    implementation "androidx.navigation:navigation-ui-ktx:2.2.0-rc03"
 
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation 'com.squareup.retrofit2:retrofit:2.7.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.0'
 
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
 
-    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation "com.github.bumptech.glide:glide:4.10.0"
 
     implementation 'androidx.palette:palette:1.0.0'
 

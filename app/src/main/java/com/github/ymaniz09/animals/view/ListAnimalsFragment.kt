@@ -65,5 +65,4 @@ class ListAnimalsFragment : Fragment() {
             refreshLayout.isRefreshing = false
         }
     }
-
 }
