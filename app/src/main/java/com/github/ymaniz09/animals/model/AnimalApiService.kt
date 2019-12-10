@@ -19,7 +19,5 @@ class AnimalApiService {
 
     fun getApiKey() = api.getApiKey()
 
-
     fun getAnimals(key: String) = api.getAnimals(key)
-    
 }
