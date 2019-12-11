@@ -19,6 +19,10 @@ import javax.inject.Inject
 
 class ListViewModel(application: Application) : AndroidViewModel(application) {
 
+    constructor(application: Application, test: Boolean = true): this(application) {
+        injected = true
+    }
+
     val animals by lazy { MutableLiveData<List<Animal>>() }
     val loadError by lazy { MutableLiveData<Boolean>() }
     val loading by lazy { MutableLiveData<Boolean>() }
@@ -32,15 +36,22 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
     @Inject
     lateinit var prefs: SharedPreferencesHelper
 
-    init {
-        DaggerViewModelComponent
-            .builder()
-            .appModule(AppModule(getApplication()))
-            .build()
-            .inject(this)
+    private var injected = false
+
+
+    fun inject() {
+        if(!injected) {
+            DaggerViewModelComponent
+                .builder()
+                .appModule(AppModule(getApplication()))
+                .build()
+                .inject(this)
+        }
     }
 
     fun refresh() {
+        inject()
+
         loading.value = true
 
         invalidApiKey = false
@@ -54,6 +65,8 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun hardRefresh() {
+        inject()
+
         loading.value = true
         getKey()
     }
@@ -75,7 +88,7 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.e(TAG, "Error calling getApiKey()", e)
+                        //Log.e(TAG, "Error calling getApiKey()", e)
                         loadError.value = true
                         loading.value = false
                     }
@@ -105,7 +118,7 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
                             invalidApiKey = true
                             getKey()
                         } else {
-                            Log.e(TAG, "Error calling getAnimals()", e)
+                           // Log.e(TAG, "Error calling getAnimals()", e)
                             loadError.value = true
                             loading.value = false
                             animals.value = null
