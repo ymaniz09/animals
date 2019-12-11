@@ -1,20 +1,15 @@
 package com.github.ymaniz09.animals.model
 
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import com.github.ymaniz09.animals.di.DaggerApiComponent
+import javax.inject.Inject
 
 class AnimalApiService {
 
-    private val api = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .build()
-        .create(AnimalApi::class.java)
+    @Inject
+    lateinit var api: AnimalApi
 
-    companion object {
-        const val BASE_URL = "https://us-central1-apis-4674e.cloudfunctions.net/"
+    init {
+        DaggerApiComponent.create().inject(this)
     }
 
     fun getApiKey() = api.getApiKey()

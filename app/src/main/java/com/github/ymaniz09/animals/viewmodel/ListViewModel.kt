@@ -4,6 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.github.ymaniz09.animals.di.AppModule
+import com.github.ymaniz09.animals.di.DaggerViewModelComponent
 import com.github.ymaniz09.animals.model.Animal
 import com.github.ymaniz09.animals.model.AnimalApiService
 import com.github.ymaniz09.animals.model.ApiKey
@@ -13,6 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class ListViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -21,11 +24,21 @@ class ListViewModel(application: Application) : AndroidViewModel(application) {
     val loading by lazy { MutableLiveData<Boolean>() }
 
     private val disposable = CompositeDisposable()
-    private val apiService = AnimalApiService()
-
-    private val prefs = SharedPreferencesHelper(getApplication())
-
     private var invalidApiKey = false
+
+    @Inject
+    lateinit var apiService: AnimalApiService
+
+    @Inject
+    lateinit var prefs: SharedPreferencesHelper
+
+    init {
+        DaggerViewModelComponent
+            .builder()
+            .appModule(AppModule(getApplication()))
+            .build()
+            .inject(this)
+    }
 
     fun refresh() {
         loading.value = true
